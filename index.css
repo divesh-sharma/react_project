@@ -1,3 +1,14 @@
 #heading{
     color: blue;
+    animation: my-animation;
+    animation-duration: infinite;
+}
+
+@keyframes my-animation {
+    from{
+     color: yellow;
+    };
+    to{
+color: skyblue;
+    }
 }
