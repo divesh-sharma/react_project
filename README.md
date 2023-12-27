@@ -18,3 +18,13 @@ Code Splitting
 - Error Handling
 - HTTPS
 - Tree Shaking - remove unused code You, now Uncommitted changes
+
+
+#Babel
+www.babeljs.io
+
+#extension
+Prettuer-code 
+Bracket pair colorizeation
+ESLint
+Better Comments
