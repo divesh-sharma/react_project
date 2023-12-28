@@ -36,7 +36,6 @@ margin: 10px;
     margin: 5px;
     padding: 5px;
     width: 200px;
-    height: 350px;
     background-color: lightgray;
    
 }
@@ -48,4 +47,8 @@ margin: 10px;
 .res-logo{
 
     width: 100%;
+}
+
+.filter-btn{
+    margin: 20px;
 }
