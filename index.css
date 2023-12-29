@@ -50,7 +50,7 @@ margin: 10px;
 }
 
 .filter-btn{
-    margin: 20px;
+    margin: 10px;
 }
 .shimmer-container{
     display: flex;
@@ -66,4 +66,8 @@ margin: 10px;
 .login{
     padding: 0 20px;
     cursor: pointer;
+}
+
+.filter{
+    display: flex;
 }
