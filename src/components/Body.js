@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 const TOP_RATED = 4;
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 
@@ -39,6 +40,12 @@ const Body = ()=>{
      
         },1000)
     }
+const onlineStatus = useOnlineStatus();
+if(onlineStatus===false)
+return (
+    <h1>Looks Like your internet connection not working</h1>
+)
+
 // Condition Rendering 
     // if(listOfRestaurants.length==0){
     //     return <Shimmer />
