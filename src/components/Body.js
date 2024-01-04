@@ -53,15 +53,15 @@ return (
     return listOfRestaurants.length==0 ? (<Shimmer />):
     (
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box"
+            <div className="filter flex items-center">
+                <div className="search m-4 p-4">
+                    <input type="text" className="border border-solid border-black"
                     value={searchText}
                     onChange={(e)=>{
                         setSearchText(e.target.value)
                     }}
                     />
-                    <button className="search-btn"
+                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
                     onClick={()=>{
                         //Filter the restaurant cards and update the UI
                         // searchText
@@ -73,14 +73,16 @@ return (
                     >Search</button>
                 </div>
                 
-                <button className="filter-btn"
+               <div className="search m-4 p-4 ">
+               <button className="px-4 py-2 bg-gray-100 items-center"
                 onClick={()=>{
                     console.log("Button Clicked");
                     setTopRatedRestuarent();
                 }}
                 >Top Rated Restaurant</button>
+               </div>
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap rounded-lg">
                 {
                 filteredRestaurant.map((resObj)=>
       <Link   to={"/restaurant/"+resObj.info.id}>
