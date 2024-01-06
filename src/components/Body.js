@@ -32,8 +32,10 @@ const Body = ()=>{
 
         const json = await data.json();
         // options chaining
-        console.log(json?.data?.cards[4].card.card.gridElements.infoWithStyle.restaurants);
-        const resData = json?.data?.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+        console.log(json);
+        console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        const resData = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        
         setTimeout(()=>{
             setListOfRestaurants(resData);
             setFilteredRestaurant(resData)
@@ -61,12 +63,14 @@ return (
                         setSearchText(e.target.value)
                     }}
                     />
-                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+                    <button className="px-4 py-2 bg-green-100 m-4 rounded-lg hover:scale-110"
                     onClick={()=>{
                         //Filter the restaurant cards and update the UI
                         // searchText
 
-                      const filteredRestaurant =  listOfRestaurants.filter((res)=>res.name.toLowerCase().includes(searchText.toLowerCase()));
+                      const filteredRestaurant =  listOfRestaurants.filter((res)=>{
+                        console.log(res);
+                        return res?.info.name.toLowerCase().includes(searchText.toLowerCase())});
                       setFilteredRestaurant(filteredRestaurant);
 
                     }}
@@ -74,7 +78,7 @@ return (
                 </div>
                 
                <div className="search m-4 p-4 ">
-               <button className="px-4 py-2 bg-gray-100 items-center"
+               <button className="px-4 py-2 bg-gray-100 items-center hover:scale-110"
                 onClick={()=>{
                     console.log("Button Clicked");
                     setTopRatedRestuarent();
