@@ -1,21 +1,21 @@
 import { resList } from "../utils/mockData";
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard,{withPromotedLabel} from "./RestaurantCard";
+import { useEffect, useState,useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 const TOP_RATED = 4;
 import useOnlineStatus from "../utils/useOnlineStatus";
-
-
+import UserContext  from "../utils/UserContext";
 
 
 const Body = ()=>{
     const [listOfRestaurants,setListOfRestaurants] = useState([]);
     let [filteredRestaurant,setFilteredRestaurant]=useState([]);
     const [searchText,setSearchText]=useState("");
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
     const setTopRatedRestuarent = ()=>{
         const list= listOfRestaurants.filter(resObj=>resObj.avgRating>= TOP_RATED);
-        console.log(list);
+  
         setListOfRestaurants(list);
         
     }
@@ -25,6 +25,8 @@ const Body = ()=>{
     },[]);
 
     console.log("rendering");
+    const {loggedInUser,setUserName} = useContext(UserContext);
+    console.log(setUserName)
 
     const fetchData = async ()=>{
         // const data =await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING");
@@ -34,13 +36,26 @@ const Body = ()=>{
         // options chaining
         console.log(json);
         console.log(json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-        const resData = json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        const resData = addPromotedLabel(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         
         setTimeout(()=>{
             setListOfRestaurants(resData);
             setFilteredRestaurant(resData)
      
         },1000)
+    }
+
+    const addPromotedLabel = (resData)=>{
+        const promotedData = resData.map((resObj,index)=>{
+            if(index==0 || index == resData.length-1){
+                resObj.info.promoted = true;
+            }else{
+                resObj.info.promoted = false;
+            }
+            return resObj;
+            
+        });
+        return promotedData;
     }
 const onlineStatus = useOnlineStatus();
 if(onlineStatus===false)
@@ -52,7 +67,8 @@ return (
     // if(listOfRestaurants.length==0){
     //     return <Shimmer />
     // }
-    return listOfRestaurants.length==0 ? (<Shimmer />):
+    console.log(listOfRestaurants)
+    return listOfRestaurants.length===0 ? (<Shimmer />):
     (
         <div className="body">
             <div className="filter flex items-center">
@@ -85,14 +101,22 @@ return (
                 }}
                 >Top Rated Restaurant</button>
                </div>
+               <div className="search m-4 p-4 ">
+<label>UserName : </label>
+<input className="border border-black p-2" 
+value={loggedInUser}
+onChange={(e)=>setUserName(e.target.value)}/>
+               </div>
             </div>
             <div className="flex flex-wrap rounded-lg">
                 {
                 filteredRestaurant.map((resObj)=>
       <Link   to={"/restaurant/"+resObj.info.id}>
-        <RestaurantCard
+        {/* if the restaurant is promoted show the promoted label */}
+       {resObj?.info?.promoted ? (<RestaurantCardPromoted   resData={resObj} key={resObj.info.id} />):(  <RestaurantCard
       
-        resData={resObj} key={resObj.info.id}/>
+      resData={resObj} key={resObj.info.id}/>)}
+      
       </Link>
 
                 )
