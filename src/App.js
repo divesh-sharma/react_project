@@ -8,6 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import {Provider} from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 // import Grocery from "./components/Grocery";
 
 // Chunking
@@ -31,7 +34,8 @@ const AppLayout = ()=>{
         setUserName(data.name);
     },[])
     return (
-        <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
+      <Provider store={appStore}>
+          <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
         <div className="app">
             <UserContext.Provider value={{loggedInuser:"Rockstar default"}}>
 <Header />
@@ -40,6 +44,7 @@ const AppLayout = ()=>{
 <Outlet />
         </div>
         </UserContext.Provider>
+      </Provider>
     )
 }
 // first we create
@@ -85,6 +90,10 @@ const appRouter = createBrowserRouter([
                 element:<Suspense
                 fallback={<h1>Loading...</h1>}>      <Grocery /></Suspense>
           
+            },
+            {
+                path:"/cart",
+                element:<Cart />
             }
         ],
         errorElement:<Error />

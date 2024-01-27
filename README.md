@@ -74,3 +74,13 @@ feature is incremental rendering: the ability to split rendering work into chunk
 frames.
 Other key features include the ability to pause, abort, or reuse work as new updates come in; the ability to assign
 priority to different types of updates; and new concurrency primitives.
+
+
+# Redux Toolkit
+ - Install redux toolkit(@reduxjs/toolkit) and react-redux
+ - Build our store
+ - Connect our store to our app
+ - Slice (cartSlice)
+ - dispatch(action)
+ -Selector 
+ - React RTK Query - we have middle ware and thunks early we use but have RTK query
