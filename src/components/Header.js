@@ -32,7 +32,7 @@ console.log(cartItems);
                        <Link to="contact"> Contact Us
                        </Link></li>
                        <li className="px-4 ">
-                       <Link to="cart"> Cart ({cartItems.length})
+                       <Link to="cart">Carts ({cartItems.length})
                        </Link></li>
                        <li className="px-4">
                         <Link to="grocery">Grocery</Link>
