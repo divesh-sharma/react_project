@@ -14,6 +14,7 @@ global.fetch = jest.fn(()=>{
         }
     })
 })
+
 it("Should search res list for burger text input",async ()=>{
 await act(async ()=> render(
     <BrowserRouter>
