@@ -3,12 +3,14 @@ import "@testing-library/jest-dom";
 import Body from "../Body";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
+import MOCK_LIST from "../../components/mocks/mockResListData.json";
+
 
 // making mock fetch function fetch return promise which have json fn which return promise
 global.fetch = jest.fn(()=>{
     return Promise.resolve({
         json:()=>{
-            return Promise.resolve(data);
+            return Promise.resolve(MOCK_LIST);
         }
     })
 })
